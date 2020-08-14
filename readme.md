@@ -10,7 +10,7 @@ The performance is very close to the paper's, it is still SOTA.
 
 The speed/FPS test includes the time of post-processing with no jit/data precision trick.
 
-| coefficient | pth_download | GPU Mem(MB) | FPS | Extreme FPS (Batchsize 32) | mAP 0.5:0.95(this repo) | mAP 0.5:0.95(paper) |
+| coefficient | pth_download | GPU Mem(MB) | FPS | Extreme FPS (Batchsize 32) | mAP 0.5:0.95(this repo) | mAP 0.5:0.95(official) |
 | :-----: | :-----: | :------: | :------: | :------: | :-----: | :-----: |
 | D0 | [efficientdet-d0.pth](https://github.com/zylo117/Yet-Another-Efficient-Pytorch/releases/download/1.0/efficientdet-d0.pth) | 1049 | 36.20 | 163.14 | 33.1 | 33.8
 | D1 | [efficientdet-d1.pth](https://github.com/zylo117/Yet-Another-Efficient-Pytorch/releases/download/1.0/efficientdet-d1.pth) | 1159 | 29.69 | 63.08 | 38.8 | 39.6
@@ -19,40 +19,16 @@ The speed/FPS test includes the time of post-processing with no jit/data precisi
 | D4 | [efficientdet-d4.pth](https://github.com/zylo117/Yet-Another-Efficient-Pytorch/releases/download/1.0/efficientdet-d4.pth) | 1903 | 14.75 | - | 48.8 | 49.4
 | D5 | [efficientdet-d5.pth](https://github.com/zylo117/Yet-Another-Efficient-Pytorch/releases/download/1.0/efficientdet-d5.pth) | 2255 | 7.11 | - | 50.2 | 50.7
 | D6 | [efficientdet-d6.pth](https://github.com/zylo117/Yet-Another-Efficient-Pytorch/releases/download/1.0/efficientdet-d6.pth) | 2985 | 5.30 | - | 50.7 | 51.7
-| D7 | [efficientdet-d7.pth](https://github.com/zylo117/Yet-Another-Efficient-Pytorch/releases/download/1.0/efficientdet-d7.pth) | 3819 | 3.73 | - | 51.2 | 52.2
-
-## Speed Test
-
-This pure-pytorch implement is up to 2 times faster than the official Tensorflow version without any trick.
-
-Recorded on 2020-04-26,
-
-official git version: <https://github.com/google/automl/commit/006668f2af1744de0357ca3d400527feaa73c122>
-
-| coefficient | FPS(this repo, tested on RTX2080Ti) | FPS(official, tested on T4) |  Ratio |
-| :------: | :------: | :------: | :-----: |
-| D0 | 36.20 | 42.1 | 0.86X |
-| D1 | 29.69 | 27.7 | 1.07X |
-| D2 | 26.50 | 19.7 | 1.35X |
-| D3 | 22.73 | 11.8 | 1.93X |
-| D4 | 14.75 | 7.1 | 2.08X |
-| D5 | 7.11 | 3.6 | 1.98X |
-| D6 | 5.30 | 2.6 | 2.03X |
-| D7 | 3.73 | - | - |
-
-Test method (this repo):
-
-Run this test on 2080Ti, Ubuntu 19.10 x64.
-
-1. Prepare a image tensor with the same content, size (1,3,512,512)-pytorch.
-2. Initiate everything by inferring once.
-3. Run 10 times with batchsize 1 and calculate the average time, including post-processing and visualization, to make the test more practical.
-
-___
+| D7 | [efficientdet-d7.pth](https://github.com/zylo117/Yet-Another-Efficient-Pytorch/releases/download/1.2/efficientdet-d7.pth) | 3819 | 3.73 | - | 52.7 | 53.7
+| D7X | [efficientdet-d8.pth](https://github.com/zylo117/Yet-Another-Efficient-Pytorch/releases/download/1.2/efficientdet-d8.pth) | 3983 | 2.39 | - | 53.9 | 55.1
 
 ## Update Log
 
-[2020-05-11] add boolean string convertion to make sure head_only works
+[2020-07-23] supports efficientdet-d7x, mAP 53.9, using efficientnet-b7 as its backbone and an extra deeper pyramid level of BiFPN. For the sake of simplicity, let's call it efficientdet-d8.
+
+[2020-07-15] update efficientdet-d7 weights, mAP 52.7
+
+[2020-05-11] add boolean string conversion to make sure head_only works
 
 [2020-05-10] replace nms with batched_nms to further improve mAP by 0.5~0.7, thanks [Laughing-q](https://github.com/Laughing-q).
 
@@ -230,8 +206,9 @@ Check out this [tutorial](tutorial/train_shape.ipynb) if you are new to this. Yo
 - [X] adapt anchor strategies
 - [X] mAP tests
 - [X] training-scripts
-- [X] efficientdet D6 supports
-- [X] efficientdet D7 supports
+- [X] efficientdet D6 support
+- [X] efficientdet D7 support
+- [X] efficientdet D7x support
 
 ## FAQ
 
